@@ -48,7 +48,9 @@ def createblogpage(request):
     if request.method == "POST":
         title = request.POST["title"]
         message = request.POST["message"]
-        new_blog = Blog(author=request.user, title=title, message=message)
+        description = request.POST["description"]
+        new_blog = Blog(author=request.user, title=title,
+                        message=message, description=description)
         new_blog.save()
         print("new blog created")
         return redirect('/')
