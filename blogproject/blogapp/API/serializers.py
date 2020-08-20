@@ -5,7 +5,7 @@ from rest_framework import serializers
 class BlogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blog
-        fields = ['title', 'message', 'description']
+        fields = "__all__"
         # read_only_fields = ['title']
 
     # for validate the form use "validate _ [table field name]"

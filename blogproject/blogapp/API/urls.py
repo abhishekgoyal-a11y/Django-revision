@@ -6,4 +6,5 @@ urlpatterns = [
     path('create_blog/', create_blog, name="create_blog"),
     path('put_blog/<str:title>', put_blog, name="put_blog"),
     path('delete_blog/<str:title>', delete_blog, name="delete_blog"),
+    path('pagination/', pagination.as_view(), name="pagination"),
 ]
