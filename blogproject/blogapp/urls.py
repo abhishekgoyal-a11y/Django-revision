@@ -7,4 +7,6 @@ urlpatterns = [
     path('registration', registration, name='registration'),
     path('createblogpage', createblogpage, name='createblogpage'),
     path('viewblog', viewblog, name='viewblog'),
+    path('deleteblog/<int:pk>/', deleteblog, name='deleteblog'),
+    path('updateblog/<int:pk>/', updateblog, name='updateblog')
 ]

@@ -10,7 +10,9 @@
 <body>
     {%for i in all_blogs%}
     <h1>{{i.title}}</h1>
-    <p>{{i.message}}</p>
+    <p>{{i.description}}</p>
+    <a href="{% url 'deleteblog' i.id %}">Delete</a>
+    <a href="{% url 'updateblog' i.id %}">Update</a>
     {%endfor%}
 </body>
 

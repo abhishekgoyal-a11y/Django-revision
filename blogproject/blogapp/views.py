@@ -47,10 +47,9 @@ def registration(request):
 def createblogpage(request):
     if request.method == "POST":
         title = request.POST["title"]
-        message = request.POST["message"]
         description = request.POST["description"]
         new_blog = Blog(author=request.user, title=title,
-                        message=message, description=description)
+                        description=description)
         new_blog.save()
         print("new blog created")
         return redirect('/')
@@ -58,8 +57,25 @@ def createblogpage(request):
 
 
 def viewblog(request):
-    if request.user.is_superuser:
-        all_blogs = Blog.objects.all()
-    else:
-        all_blogs = request.user.blog_set.all()
+    all_blogs = request.user.blog_set.all()
     return render(request, 'viewblogpage.html', {"all_blogs": all_blogs})
+
+
+def deleteblog(request, pk):
+    request.user.blog_set.get(id=pk).delete()
+    return redirect("viewblog")
+
+
+def updateblog(request, pk):
+    detail = request.user.blog_set.get(id=pk)
+    details = {
+        "detail": detail,
+    }
+    if request.method == "POST":
+        updated_title = request.POST["updated_title"]
+        updated_description = request.POST["updated_description"]
+        detail.title = updated_title
+        detail.description = updated_description
+        detail.save()
+        return redirect("viewblog")
+    return render(request, 'updateblog.html', {"details": details})

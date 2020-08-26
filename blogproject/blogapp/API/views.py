@@ -84,4 +84,4 @@ class pagination(ListAPIView):
     permission_classes = (IsAuthenticated,)
     pagination_class = PageNumberPagination
     filter_backends = (SearchFilter, OrderingFilter)
-    search_fields = ('title', 'message', 'description')
+    search_fields = ('title', 'description')

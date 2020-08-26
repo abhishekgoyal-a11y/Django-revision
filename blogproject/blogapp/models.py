@@ -10,8 +10,7 @@ from rest_framework.authtoken.models import Token
 
 class Blog(models.Model):
     author = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
-    title = models.TextField(max_length=200, null=True)
-    message = models.TextField(max_length=100, null=True)
+    title = models.CharField(max_length=200, null=True)
     description = models.TextField(max_length=1000, null=True)
 
     def __str__(self):
