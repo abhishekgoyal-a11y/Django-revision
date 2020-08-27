@@ -8,12 +8,19 @@
 </head>
 
 <body>
+    {%if all_blogs%}
     {%for i in all_blogs%}
-    <h1>{{i.title}}</h1>
-    <p>{{i.description}}</p>
+    <h1>Title: {{i.title}}</h1>
+    <p>Description: {{i.description}}</p>
+    <p>Posted date: {{i.posted_date}}</p>
+    <p>Last updated: {{i.last_updated}}</p>
     <a href="{% url 'deleteblog' i.id %}">Delete</a>
     <a href="{% url 'updateblog' i.id %}">Update</a>
     {%endfor%}
+    {%else%}
+    <h1>No blog found</h1>
+    <a href="{% url 'createblogpage' %}">Create New Blog</a>
+    {%endif%}
 </body>
 
 </html>

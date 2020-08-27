@@ -12,6 +12,8 @@ class Blog(models.Model):
     author = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     title = models.CharField(max_length=200, null=True)
     description = models.TextField(max_length=1000, null=True)
+    posted_date = models.CharField(max_length=20, null=True)
+    last_updated = models.CharField(max_length=20, null=True)
 
     def __str__(self):
         return str(self.title)

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
 from .models import Blog
+from datetime import date, datetime
 # Create your views here.
 
 
@@ -39,7 +40,6 @@ def registration(request):
         user = User.objects.create_user(
             username=username, password=password1, email=email)
         user.save()
-        print("succcess")
         return redirect('/')
     return render(request, 'registration.html')
 
@@ -49,15 +49,15 @@ def createblogpage(request):
         title = request.POST["title"]
         description = request.POST["description"]
         new_blog = Blog(author=request.user, title=title,
-                        description=description)
+                        description=description, posted_date=date.today(),
+                        last_updated=datetime.now().strftime("%H:%M:%S"))
         new_blog.save()
-        print("new blog created")
-        return redirect('/')
+        return redirect('viewblog')
     return render(request, 'createblogpage.html')
 
 
 def viewblog(request):
-    all_blogs = request.user.blog_set.all()
+    all_blogs = request.user.blog_set.order_by('?')
     return render(request, 'viewblogpage.html', {"all_blogs": all_blogs})
 
 
@@ -76,6 +76,7 @@ def updateblog(request, pk):
         updated_description = request.POST["updated_description"]
         detail.title = updated_title
         detail.description = updated_description
+        detail.last_updated = datetime.now().strftime("%H:%M:%S")
         detail.save()
         return redirect("viewblog")
     return render(request, 'updateblog.html', {"details": details})
