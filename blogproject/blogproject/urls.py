@@ -24,5 +24,5 @@ urlpatterns = [
     path('', include('blogapp.urls')),
     path('api/', include('blogapp.API.urls')),
 ]
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL,
+                      document_root=settings.MEDIA_ROOT)
