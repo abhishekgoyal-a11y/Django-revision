@@ -80,11 +80,8 @@ WSGI_APPLICATION = 'apip.wsgi.application'
 DATABASES = {
 
     'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'api',
-        'HOST':'mongodb+srv://api:api@cluster0.i3zh2.mongodb.net/api?retryWrites=true&w=majority',
-        'USERNAME':'api',
-        'PASSWORD':'api'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
