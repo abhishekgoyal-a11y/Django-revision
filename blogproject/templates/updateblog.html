@@ -10,8 +10,7 @@
 <body>
     <form action="" method="POST">
         {% csrf_token%}
-        <input type="text" name="updated_title" value="{{details.detail.title}}"><br>
-        <input type="text" name="updated_description" value="{{details.detail.description}}"><br>
+        {{form.as_p}}
         <button>Update</button>
     </form>
 </body>

@@ -11,10 +11,7 @@
     <h1>registration page</h1>
     <form action="" method="POST">
         {%csrf_token%}
-        <input type="text" name="username" placeholder="username"><br>
-        <input type="text" name="email" placeholder="email"><br>
-        <input type="text" name="password1" placeholder="password1"><br>
-        <input type="text" name="password2" placeholder="password1"><br>
+        {{form.as_p}}
         <button>Create account</button>
     </form>
 </body>
