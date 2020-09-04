@@ -11,6 +11,7 @@
     {%if all_blogs%}
     {%for i in all_blogs%}
     <h1>Title: {{i.title}}</h1>
+    <img style="width:200px; height: 200px;" src="{{i.image.url}}" alt="No image found!">
     <p>Description: {{i.description}}</p>
     <p>Posted date: {{i.posted_date}}</p>
     <p>Last updated: {{i.last_updated}}</p>

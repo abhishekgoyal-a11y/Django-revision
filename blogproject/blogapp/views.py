@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
-from .models import Blog
+from .models import *
 from datetime import date, datetime
 from .form import *
 # Create your views here.
@@ -48,13 +48,16 @@ def registration(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
+            CustomerProfile(
+                name= form.cleaned_data['username'],
+                ).save()
         return redirect('/')
     return render(request, 'registration.html',{"form":form})
 
 def createblogpage(request):
     form = BlogForm()
     if request.method == "POST":
-        form=BlogForm(request.POST)
+        form=BlogForm(request.POST,request.FILES)
         if form.is_valid():
             blog = form.save(commit=False)
             blog.author=request.user
@@ -65,12 +68,35 @@ def createblogpage(request):
 def updateblog(request, pk):
     detail = request.user.blog_set.get(id=pk)
     form = BlogForm(instance=detail)
+    details= {
+    "form":form,
+    "detail":detail
+    }
     if request.method == "POST":
-        form = BlogForm(request.POST,instance=detail)
+        form = BlogForm(request.POST,request.FILES,instance=detail)
         if form.is_valid():
             form.save()
         return redirect("viewblog")
-    return render(request, 'updateblog.html', {"form":form})
+    return render(request, 'updateblog.html', {"details":details})
+
+
+def customer_profile(request):
+    profile = CustomerProfile.objects.get(name=request.user)
+    form = CustomerProfileForm()
+    details={
+    "profile":profile,
+    "form":form
+    }
+    if request.method=="POST":
+        print("fsdf")
+        form= CustomerProfileForm(request.POST,request.FILES,instance=profile)
+        if form.is_valid():
+            print("sav")
+            form.save()
+        else:
+            print("eror")
+        return redirect("customer_profile")
+    return render(request,'customer_profile.html',{"details":details})
 
 
 

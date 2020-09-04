@@ -12,6 +12,7 @@ from datetime import date, datetime
 class Blog(models.Model):
     author = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     title = models.CharField(max_length=200, null=True)
+    image  = models.ImageField(upload_to="blogimages/",default="blogimages/default.jpg")
     description = models.TextField(max_length=1000, null=True)
     posted_date = models.DateField(auto_now_add=True, null=True)
     last_updated = models.TimeField(auto_now=True, null=True)
@@ -24,3 +25,12 @@ class Blog(models.Model):
 def Token_generate(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
+
+
+class CustomerProfile(models.Model):
+    name = models.CharField(max_length=50,unique=True) 
+    profile_image = models.ImageField(upload_to='images/',default='images/default.jpg')
+
+    def __str__(self):
+        return str(self.name)
+

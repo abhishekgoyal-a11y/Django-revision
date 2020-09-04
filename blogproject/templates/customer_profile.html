@@ -8,12 +8,13 @@
 </head>
 
 <body>
+    <h1>Profile page</h1>
     <form action="" method="POST" enctype="multipart/form-data">
-        {% csrf_token%}
+        {%csrf_token%}
         {{details.form.as_p}}
-        <button>Update</button>
+        <button>Update profile</button>
     </form>
-    <img style="width:200px; height: 200px;" src="{{details.detail.image.url}}" alt="No image found!">
+    <img style="width:200px;" src="{{details.profile.profile_image.url}}" alt="No image found!">
 </body>
 
 </html>
