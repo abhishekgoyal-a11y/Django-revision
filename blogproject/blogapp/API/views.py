@@ -40,7 +40,7 @@ def create_blog(request):
             blog.save()
             return Response(serialize.data, status=status.HTTP_201_CREATED)
         else:
-            return Response(serialize.errors, status=status.HTTP_404_BAD_REQUEST)
+            return Response(serialize.errors)
 
 
 
@@ -60,7 +60,7 @@ def put_blog(request, title):
             serialize.save()
             return Response(serialize.data, status=status.HTTP_201_CREATED)
         else:
-            return Response(serialize.errors, status=status.HTTP_404_BAD_REQUEST)
+            return Response(serialize.errors)
 
 
 @api_view(['DELETE'])
@@ -71,7 +71,7 @@ def delete_blog(request, title):
         user = request.user
         if blog.author != user:
             return Response({
-                "Response": "not have permission to update"
+                "Response": "not have permission to delete"
             })
 
         blog.delete()
@@ -112,7 +112,7 @@ def create_blog_api(request,api_key):
             blog.save()
             return Response(serialize.data, status=status.HTTP_201_CREATED)
         else:
-            return Response(serialize.errors, status=status.HTTP_404_BAD_REQUEST)
+            return Response(serialize.errors)
 
 
 
