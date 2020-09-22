@@ -4,6 +4,8 @@ from django.contrib.auth.models import User, auth
 from .models import *
 from datetime import date, datetime
 from .form import *
+from plyer import notification
+import time
 # Create your views here.
 
 
@@ -145,3 +147,13 @@ def customer_profile(request):
 
 
 
+
+
+def notification(request):
+    notification.notify(
+        title="Drink Water",
+        message="Drinking water after a massage is important and reduces soreness. One way to boost your odds for not being sore the next day is increase your water intake after your appointment",
+        app_icon="drinkwater.ico",
+        timeout=5
+    )
+    time.sleep(5)

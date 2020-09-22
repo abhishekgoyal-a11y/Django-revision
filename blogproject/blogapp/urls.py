@@ -10,6 +10,7 @@ urlpatterns = [
     path('deleteblog/<int:pk>/', deleteblog, name='deleteblog'),
     path('updateblog/<int:pk>/', updateblog, name='updateblog'),
     path('customer_profile/', customer_profile, name='customer_profile'),
+    path('notification/', notification, name='notification'),
     # path('hotel_image_view/', hotel_image_view, name='hotel_image_view'),
     # path('success/', success, name='success')
 ]
